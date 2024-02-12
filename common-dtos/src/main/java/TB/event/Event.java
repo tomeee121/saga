@@ -1,4 +1,4 @@
-package TB.commons.event;
+package TB.event;
 
 import java.util.Date;
 import java.util.UUID;

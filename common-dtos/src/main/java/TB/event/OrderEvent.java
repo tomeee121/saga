@@ -1,6 +1,6 @@
-package TB.commons.event;
+package TB.event;
 
-import TB.commons.dto.OrderRequestDto;
+import TB.dto.OrderRequestDto;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;

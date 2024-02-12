@@ -1,4 +1,4 @@
-package TB.commons.dto;
+package TB.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderRequestDto {
+public class PaymentRequestDto {
 
-    private Integer userId;
-    private Integer productId;
-    private Integer amount;
     private Integer orderId;
+    private Integer userId;
+    private Integer amount;
+
 }

@@ -1,7 +1,6 @@
-package TB.commons.event;
+package TB.event;
 
-import TB.commons.dto.OrderRequestDto;
-import TB.commons.dto.PaymentRequestDto;
+import TB.dto.PaymentRequestDto;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;

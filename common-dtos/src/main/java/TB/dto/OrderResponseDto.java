@@ -1,5 +1,6 @@
-package TB.commons.dto;
+package TB.dto;
 
+import TB.event.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,10 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentRequestDto {
+public class OrderResponseDto {
 
-    private Integer orderId;
     private Integer userId;
+    private Integer productId;
     private Integer amount;
-
+    private Integer orderId;
+    private OrderStatus orderStatus;
 }
