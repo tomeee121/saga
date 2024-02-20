@@ -2,19 +2,20 @@ package TB.entity;
 
 import TB.event.OrderStatus;
 import TB.event.PaymentStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "PURCHASE_ORDER_TBL")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PurchaseOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
     private Integer userId;
     private Integer productId;

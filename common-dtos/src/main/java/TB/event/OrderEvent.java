@@ -1,12 +1,14 @@
 package TB.event;
 
 import TB.dto.OrderRequestDto;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
 
 @NoArgsConstructor
+@Data
 public class OrderEvent implements Event{
     private UUID eventId = UUID.randomUUID();
     private Date eventDate = new Date();

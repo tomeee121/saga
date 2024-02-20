@@ -5,19 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserTransaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
-    private Integer userId;
-    private Integer amount;
+    private int userId;
+    private int amount;
 }

@@ -4,36 +4,40 @@ import TB.dto.OrderRequestDto;
 import TB.entity.PurchaseOrder;
 import TB.event.OrderStatus;
 import TB.repository.OrderRepository;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static TB.event.OrderStatus.ORDER_CREATED;
-
 @Service
-@AllArgsConstructor
 public class OrderService {
 
-    private final OrderRepository orderRepository;
-    private final OrderStatusPublisher orderStatusPublisher;
+    @Autowired
+    private OrderRepository orderRepository;
 
-    @Transactional(Transactional.TxType.REQUIRED)
+    @Autowired
+    private OrderStatusPublisher orderStatusPublisher;
+
+    @Transactional
     public PurchaseOrder createOrder(OrderRequestDto orderRequestDto) {
-        PurchaseOrder orderPlaced = orderRepository.saveAndFlush(convertOrderDtoToEntity(orderRequestDto));
-        orderRequestDto.setOrderId(orderPlaced.getId());
-        orderStatusPublisher.publishOrderEventDto(orderRequestDto, ORDER_CREATED);
-        return orderPlaced;
+        PurchaseOrder order = orderRepository.save(convertDtoToEntity(orderRequestDto));
+        orderRequestDto.setOrderId(order.getId());
+        //produce kafka event with status ORDER_CREATED
+        orderStatusPublisher.publishOrderEvent(orderRequestDto, OrderStatus.ORDER_CREATED);
+        return order;
     }
 
-    private PurchaseOrder convertOrderDtoToEntity(OrderRequestDto orderRequestDto) {
-        return new PurchaseOrder(orderRequestDto.getOrderId(), orderRequestDto.getUserId(), orderRequestDto.getProductId(),
-                orderRequestDto.getAmount(), ORDER_CREATED, null);
-    }
-
-    public List<PurchaseOrder> getAllOrders() {
+    public List<PurchaseOrder> getAllOrders(){
         return orderRepository.findAll();
+    }
+
+
+    private PurchaseOrder convertDtoToEntity(OrderRequestDto dto) {
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        purchaseOrder.setProductId(dto.getProductId());
+        purchaseOrder.setUserId(dto.getUserId());
+        purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
+        purchaseOrder.setPrice(dto.getAmount());
+        return purchaseOrder;
     }
 }
