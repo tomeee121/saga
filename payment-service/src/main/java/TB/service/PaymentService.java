@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Service
+@Service("processingPaymentService")
 public class PaymentService {
 
     @Autowired

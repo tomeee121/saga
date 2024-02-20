@@ -5,6 +5,7 @@ import TB.event.OrderStatus;
 import TB.event.PaymentEvent;
 import TB.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
@@ -16,6 +17,7 @@ import java.util.function.Function;
 public class PaymentConsumerConfig {
 
     @Autowired
+    @Qualifier("processingPaymentService")
     private PaymentService paymentService;
 
     @Bean
