@@ -2,7 +2,7 @@ spring:
   cloud:
     stream:
       function:
-        definition : paymentProcessor
+        paymentProcessor
       bindings:
         paymentProcessor-in-0 :
           destination: order-event
